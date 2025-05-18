@@ -1,0 +1,34 @@
+services:
+  producer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["node", "dist/producer.js"]
+    ports:
+      - "8000:8000"
+    environment:
+      - UPSTASH_REDIS_REST_URL=${UPSTASH_REDIS_REST_URL}
+      - UPSTASH_REDIS_REST_TOKEN=${UPSTASH_REDIS_REST_TOKEN}
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  consumer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["node", "dist/consumer.js"]
+    environment:
+      - UPSTASH_REDIS_REST_URL=${UPSTASH_REDIS_REST_URL}
+      - UPSTASH_REDIS_REST_TOKEN=${UPSTASH_REDIS_REST_TOKEN}
+    depends_on:
+      - producer
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

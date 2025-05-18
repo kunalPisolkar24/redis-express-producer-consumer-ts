@@ -1,0 +1,31 @@
+{
+  "name": "producerconsumer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/producer.js",
+  "scripts": {
+    "build": "tsc",
+    "start:producer": "node dist/producer.js",
+    "dev:producer": "nodemon src/producer.ts",
+    "start:consumer": "node dist/consumer.js",
+    "dev:consumer": "nodemon src/consumer.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@upstash/redis": "^1.34.9",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.2",
+    "@types/node": "^22.15.18",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
